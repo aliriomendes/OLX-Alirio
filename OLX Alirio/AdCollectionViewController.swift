@@ -25,6 +25,7 @@ class AdCollectionViewController: UICollectionViewController, AdsDelegate, AdCol
         self.navigationController!.navigationBar.shadowImage = UIImage()
         self.navigationController!.navigationBar.translucent = true;
         self.navigationController!.navigationBar.topItem!.title = ""
+        
         self.setupCollectionView()
     }
     func setupCollectionView(){
@@ -93,6 +94,14 @@ class AdCollectionViewController: UICollectionViewController, AdsDelegate, AdCol
             activityController.popoverPresentationController?.sourceView = self.view
         }
         self.presentViewController(activityController, animated: true,completion: nil)
+    }
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+    }
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == (ads.numberOfAds-1) {
+            ads.loadMoreFromServer()
+        }
     }
 }       
 

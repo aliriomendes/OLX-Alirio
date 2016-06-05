@@ -11,32 +11,28 @@ import UIKit
 class AdDetailViewController: UIViewController {
     var pageIndex: Int!
     var ad:Ad!
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var headerImageView: UIImageView!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateDescriptionLabel: UILabel!
+    @IBOutlet weak var headerContainerHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var lacationContainerView: UIView!
+    @IBOutlet weak var cityLocationLAbel: UILabel!
+    
+    
+    @IBOutlet weak var adDescriptionLabel: UILabel!
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController!.navigationBar.topItem!.title = ""
-        
-        let headerImageTGRecognizer = UITapGestureRecognizer(target:self, action:#selector(AdDetailViewController.headerImageTapped(_:)))
-        let lacationContainerTGRecognizer = UITapGestureRecognizer(target:self, action:#selector(AdDetailViewController.lacationContainerTapped(_:)))
-
-        headerImageView.userInteractionEnabled = true
-        headerImageView.addGestureRecognizer(headerImageTGRecognizer)
-        
-        lacationContainerView.userInteractionEnabled = true
-        lacationContainerView.addGestureRecognizer(lacationContainerTGRecognizer)
     }
     override func viewWillAppear(animated: Bool) {
         self.updateUI()
     }
-    
     func updateUI(){
         if let firstPhoto = ad?.photos.first {
             headerImageView.downloadedFrom(link: firstPhoto.url)
@@ -44,14 +40,35 @@ class AdDetailViewController: UIViewController {
         priceLabel.text = self.ad!.list_label
         titleLabel.text = self.ad!.title
         dateDescriptionLabel.text = self.ad!.created
+        cityLocationLAbel.text = self.ad!.city_label
+        adDescriptionLabel.text = self.ad!.adDescription
+        adDescriptionLabel.sizeToFit()
+        setupConstraintsView()
+    }
+    func setupConstraintsView(){
+        if (UIDevice.currentDevice().orientation == .LandscapeLeft || UIDevice.currentDevice().orientation == .LandscapeRight)
+            && UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+            headerContainerHeightConstraint.constant = 250
+        }else{
+            headerContainerHeightConstraint.constant = 350
+        }
+        UIView.animateWithDuration(0.3) {
+            self.view.layoutIfNeeded()
+        }
     }
     
-    func headerImageTapped(img: AnyObject){
-        self.performSegueWithIdentifier(Storyboard.PhotosPageSegueIdentifier, sender: self.ad)
+    @IBAction func headerImageTapped(sender: AnyObject){
+        if ad.photos.numberOfPhotos > 0 {
+            self.performSegueWithIdentifier(Storyboard.PhotosPageSegueIdentifier, sender: self.ad)
+        }
     }
     
-    func lacationContainerTapped(img: AnyObject){
+    @IBAction func lacationContainerTapped(sender: AnyObject){
         self.performSegueWithIdentifier(Storyboard.LocationViewSegueIdentifier, sender: self.ad)
+    }
+    
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        setupConstraintsView()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -65,7 +82,4 @@ class AdDetailViewController: UIViewController {
             viewController.ad = ad
         }
     }
-    
-    
-    
 }

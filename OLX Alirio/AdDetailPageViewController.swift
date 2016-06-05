@@ -18,7 +18,6 @@ class AdDetailPageViewController: UIPageViewController, UIPageViewControllerData
         self.dataSource = self
         self.delegate = self;
         self.view.layer.backgroundColor = UIColor.whiteColor().CGColor
-        
         setViewControllers([self.viewControllerAtIndex(indexPath.row)], direction: .Forward, animated: true, completion: nil)
     }
     

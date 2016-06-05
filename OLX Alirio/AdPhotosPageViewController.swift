@@ -17,6 +17,7 @@ class AdPhotosPageViewController: UIPageViewController, UIPageViewControllerData
         self.navigationController!.navigationBar.topItem!.title = ""
         self.dataSource = self
         self.setViewControllers([self.viewControllerAtIndex(0) as AdPhotosViewController], direction: .Forward, animated: true, completion: nil)
+        
     }
     
     
@@ -26,6 +27,7 @@ class AdPhotosPageViewController: UIPageViewController, UIPageViewControllerData
     func viewControllerAtIndex(index: Int) -> AdPhotosViewController {
         let viewController = UIStoryboard(name: Storyboard.StoryboardIdentifier, bundle: nil).instantiateViewControllerWithIdentifier(Storyboard.AdPhotosViewIdentifier) as! AdPhotosViewController
         viewController.pageIndex = index
+        
         viewController.photo = self.photos.photoAtIndex(index)
         self.pageIndex = index
         return viewController

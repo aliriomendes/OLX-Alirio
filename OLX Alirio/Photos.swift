@@ -42,7 +42,6 @@ class Photos {
             let width = photoData["w"].intValue
             let height = photoData["h"].intValue
             let photo = Photo(slot_id: slotId, width: width, height: height)
-            print("photo data")
             newPhotos.append(photo)
         }
         self.photos =  newPhotos
