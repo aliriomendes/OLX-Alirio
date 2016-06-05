@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2BAA5587ABC03571252B102C /* Pods_OLX_Alirio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E482E192A18DB0FD5997038 /* Pods_OLX_Alirio.framework */; };
+		551F911F1D030627001D27EC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551F911E1D030627001D27EC /* Extensions.swift */; };
+		551F91211D044ABA001D27EC /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551F91201D044ABA001D27EC /* Photo.swift */; };
+		551F91231D045412001D27EC /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551F91221D045412001D27EC /* Photos.swift */; };
 		55C026C91D00F53600FE39C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C026C81D00F53600FE39C2 /* AppDelegate.swift */; };
 		55C026CE1D00F53600FE39C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55C026CC1D00F53600FE39C2 /* Main.storyboard */; };
 		55C026D11D00F53600FE39C2 /* OLX_Alirio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55C026CF1D00F53600FE39C2 /* OLX_Alirio.xcdatamodeld */; };
@@ -23,10 +26,10 @@
 		55EE4A2D1D01B67D008C2268 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C026FF1D010CE700FE39C2 /* SwiftyJSON.framework */; };
 		55EE4A2F1D022664008C2268 /* AdDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EE4A2E1D022664008C2268 /* AdDetailViewController.swift */; };
 		55EE4A311D0226D6008C2268 /* AdDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EE4A301D0226D6008C2268 /* AdDetailPageViewController.swift */; };
-		55EE4A341D023077008C2268 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EE4A331D023077008C2268 /* MapKit.framework */; };
 		55EE4A361D0230D9008C2268 /* AdLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EE4A351D0230D9008C2268 /* AdLocationViewController.swift */; };
 		55EE4A381D023111008C2268 /* AdPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EE4A371D023111008C2268 /* AdPhotosViewController.swift */; };
 		55EE4A3A1D023124008C2268 /* AdPhotosPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EE4A391D023124008C2268 /* AdPhotosPageViewController.swift */; };
+		55EE4A3E1D024C75008C2268 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EE4A3D1D024C75008C2268 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		551F911E1D030627001D27EC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		551F91201D044ABA001D27EC /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		551F91221D045412001D27EC /* Photos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		55C026C51D00F53600FE39C2 /* OLX Alirio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OLX Alirio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C026C81D00F53600FE39C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55C026CD1D00F53600FE39C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -68,10 +74,10 @@
 		55EE4A2A1D01B4B6008C2268 /* AdCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdCollectionViewCell.swift; sourceTree = "<group>"; };
 		55EE4A2E1D022664008C2268 /* AdDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdDetailViewController.swift; sourceTree = "<group>"; };
 		55EE4A301D0226D6008C2268 /* AdDetailPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdDetailPageViewController.swift; sourceTree = "<group>"; };
-		55EE4A331D023077008C2268 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		55EE4A351D0230D9008C2268 /* AdLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdLocationViewController.swift; sourceTree = "<group>"; };
 		55EE4A371D023111008C2268 /* AdPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdPhotosViewController.swift; sourceTree = "<group>"; };
 		55EE4A391D023124008C2268 /* AdPhotosPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdPhotosPageViewController.swift; sourceTree = "<group>"; };
+		55EE4A3D1D024C75008C2268 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6E482E192A18DB0FD5997038 /* Pods_OLX_Alirio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OLX_Alirio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C4FA1E330D835CA184A510 /* Pods-OLX Alirio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OLX Alirio.release.xcconfig"; path = "Pods/Target Support Files/Pods-OLX Alirio/Pods-OLX Alirio.release.xcconfig"; sourceTree = "<group>"; };
 		CB5F3414C7052CADF20B6782 /* Pods-OLX Alirio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OLX Alirio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OLX Alirio/Pods-OLX Alirio.debug.xcconfig"; sourceTree = "<group>"; };
@@ -82,7 +88,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55EE4A341D023077008C2268 /* MapKit.framework in Frameworks */,
 				55EE4A2D1D01B67D008C2268 /* SwiftyJSON.framework in Frameworks */,
 				55EE4A2C1D01B679008C2268 /* Alamofire.framework in Frameworks */,
 				2BAA5587ABC03571252B102C /* Pods_OLX_Alirio.framework in Frameworks */,
@@ -109,12 +114,20 @@
 		2731C6021E66940254105BA5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				55EE4A331D023077008C2268 /* MapKit.framework */,
 				55C027011D010D7400FE39C2 /* Alamofire.framework */,
 				55C026FF1D010CE700FE39C2 /* SwiftyJSON.framework */,
 				6E482E192A18DB0FD5997038 /* Pods_OLX_Alirio.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		551F911D1D02C99D001D27EC /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				55EE4A3D1D024C75008C2268 /* Constants.swift */,
+				551F911E1D030627001D27EC /* Extensions.swift */,
+			);
+			name = Util;
 			sourceTree = "<group>";
 		};
 		55C026BC1D00F53600FE39C2 = {
@@ -142,9 +155,10 @@
 		55C026C71D00F53600FE39C2 /* OLX Alirio */ = {
 			isa = PBXGroup;
 			children = (
+				55EE4A221D018003008C2268 /* Model */,
 				55EE4A291D01B490008C2268 /* View */,
-				55EE4A221D018003008C2268 /* Data Models */,
-				55EE4A321D022B6F008C2268 /* ViewController */,
+				55EE4A321D022B6F008C2268 /* Controller */,
+				551F911D1D02C99D001D27EC /* Util */,
 				55C026C81D00F53600FE39C2 /* AppDelegate.swift */,
 				55C026CC1D00F53600FE39C2 /* Main.storyboard */,
 				55C026D21D00F53600FE39C2 /* Assets.xcassets */,
@@ -173,13 +187,15 @@
 			path = "OLX AlirioUITests";
 			sourceTree = "<group>";
 		};
-		55EE4A221D018003008C2268 /* Data Models */ = {
+		55EE4A221D018003008C2268 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				55EE4A231D018024008C2268 /* Ad.swift */,
 				55EE4A251D0191F3008C2268 /* Ads.swift */,
+				551F91201D044ABA001D27EC /* Photo.swift */,
+				551F91221D045412001D27EC /* Photos.swift */,
 			);
-			name = "Data Models";
+			name = Model;
 			sourceTree = "<group>";
 		};
 		55EE4A291D01B490008C2268 /* View */ = {
@@ -190,7 +206,7 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		55EE4A321D022B6F008C2268 /* ViewController */ = {
+		55EE4A321D022B6F008C2268 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				55EE4A271D01963C008C2268 /* AdCollectionViewController.swift */,
@@ -200,7 +216,7 @@
 				55EE4A391D023124008C2268 /* AdPhotosPageViewController.swift */,
 				55EE4A371D023111008C2268 /* AdPhotosViewController.swift */,
 			);
-			name = ViewController;
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		E0CE471BB293059F12DDE220 /* Pods */ = {
@@ -394,13 +410,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				551F91211D044ABA001D27EC /* Photo.swift in Sources */,
 				55EE4A2F1D022664008C2268 /* AdDetailViewController.swift in Sources */,
 				55EE4A241D018024008C2268 /* Ad.swift in Sources */,
+				551F91231D045412001D27EC /* Photos.swift in Sources */,
 				55EE4A281D01963C008C2268 /* AdCollectionViewController.swift in Sources */,
 				55EE4A3A1D023124008C2268 /* AdPhotosPageViewController.swift in Sources */,
 				55C026D11D00F53600FE39C2 /* OLX_Alirio.xcdatamodeld in Sources */,
 				55EE4A2B1D01B4B6008C2268 /* AdCollectionViewCell.swift in Sources */,
 				55C026C91D00F53600FE39C2 /* AppDelegate.swift in Sources */,
+				55EE4A3E1D024C75008C2268 /* Constants.swift in Sources */,
+				551F911F1D030627001D27EC /* Extensions.swift in Sources */,
 				55EE4A311D0226D6008C2268 /* AdDetailPageViewController.swift in Sources */,
 				55EE4A261D0191F3008C2268 /* Ads.swift in Sources */,
 				55EE4A381D023111008C2268 /* AdPhotosViewController.swift in Sources */,
@@ -549,17 +569,7 @@
 			baseConfigurationReference = CB5F3414C7052CADF20B6782 /* Pods-OLX Alirio.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/DerivedData/OLX",
-					"Alirio/Build/Products/Debug-iphonesimulator/SwiftyJSON",
-					"$(PROJECT_DIR)/DerivedData/OLX",
-					"Alirio/Build/Products/Debug-iphonesimulator/Alamofire",
-					"$(PROJECT_DIR)/DerivedData/OLX",
-					"Alirio/Build/Products/Debug-iphonesimulator/Alamofire",
-					"$(PROJECT_DIR)/DerivedData/OLX",
-					"Alirio/Build/Products/Debug-iphonesimulator/SwiftyJSON",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "OLX Alirio/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -573,16 +583,11 @@
 			baseConfigurationReference = 89C4FA1E330D835CA184A510 /* Pods-OLX Alirio.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				"HEADER_SEARCH_PATHS[arch=*]" = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/DerivedData/OLX",
-					"Alirio/Build/Products/Debug-iphonesimulator/SwiftyJSON",
-					"$(PROJECT_DIR)/DerivedData/OLX",
-					"Alirio/Build/Products/Debug-iphonesimulator/Alamofire",
-					"$(PROJECT_DIR)/DerivedData/OLX",
-					"Alirio/Build/Products/Debug-iphonesimulator/Alamofire",
-					"$(PROJECT_DIR)/DerivedData/OLX",
-					"Alirio/Build/Products/Debug-iphonesimulator/SwiftyJSON",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleMaps\"",
 				);
 				INFOPLIST_FILE = "OLX Alirio/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

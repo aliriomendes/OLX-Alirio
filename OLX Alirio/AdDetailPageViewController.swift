@@ -9,8 +9,8 @@
 import UIKit
 
 class AdDetailPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    let numberOfViews = 3
-    
+    var ads:Ads!
+    var indexPath:NSIndexPath!
     var pageIndex = Int()
     
     override func viewDidLoad() {
@@ -18,7 +18,8 @@ class AdDetailPageViewController: UIPageViewController, UIPageViewControllerData
         self.dataSource = self
         self.delegate = self;
         self.view.layer.backgroundColor = UIColor.whiteColor().CGColor
-        setViewControllers([self.viewControllerAtIndex(0) as AdDetailViewController], direction: .Forward, animated: true, completion: nil)
+        
+        setViewControllers([self.viewControllerAtIndex(indexPath.row)], direction: .Forward, animated: true, completion: nil)
     }
     
     
@@ -26,11 +27,12 @@ class AdDetailPageViewController: UIPageViewController, UIPageViewControllerData
         super.didReceiveMemoryWarning()
     }
     func viewControllerAtIndex(index: Int) -> AdDetailViewController {
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("AdDetailViewController") as! AdDetailViewController
+        let viewController = UIStoryboard(name: Storyboard.StoryboardIdentifier, bundle: nil).instantiateViewControllerWithIdentifier(Storyboard.AdDetailViewIdentifier) as! AdDetailViewController
         viewController.pageIndex = index
         
         self.pageIndex = index
-        viewController.backgroudImageView = UIImageView(image:  UIImage(named: "\(index+1)"))
+        viewController.ad = ads.adForItemAtIndexPath(NSIndexPath(forItem: index, inSection: indexPath.section))
+        
         return viewController
     }
     
@@ -53,18 +55,17 @@ class AdDetailPageViewController: UIPageViewController, UIPageViewControllerData
         index = index + 1
         
         switch index {
-        case numberOfViews:
+        case ads.numberOfAds:
             return nil
         case NSNotFound:
             fatalError("NSNotFound. Should crash.")
         default:
-            
             return viewControllerAtIndex(index)
         }
     }
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return numberOfViews
+        return  ads.numberOfAds
     }
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {

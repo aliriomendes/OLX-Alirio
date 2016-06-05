@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class Ad: NSObject {
     var id:String
@@ -21,12 +22,12 @@ class Ad: NSObject {
     var topAd:Bool?
     var promotion_section:Bool?
     var category_id: Int?
-    //"params": [],
-    //"subtitle": [],
+    var params: Dictionary<String,String>?
+    var subtitle: Dictionary<String,String>?
     var business:Bool?
     var hide_user_ads_button:Bool?
     var status:String?
-    //var campaignSource: CampaignSource,
+    var campaignSource:String?
     var header:String?
     var header_type:String?
     var has_email:Bool?
@@ -34,7 +35,7 @@ class Ad: NSObject {
     var map_zoom:Int?
     var map_lat:Double?
     var map_lon:Double?
-    var map_radius:Int?
+    var map_radius:Double?
     var map_show_detailed:Bool?
     var map_location:String?
     var city_label:String?
@@ -46,23 +47,14 @@ class Ad: NSObject {
     var user_ads_url:String?
     var list_label:String
     var list_label_ad:String?
-//    "photos": {
-//				"riak_ring": 1,
-//				"riak_key": 874783235,
-//				"riak_rev": 0,
-//				"data": [
-//    {
-//    "slot_id": 1,
-//    "w": 740,
-//    "h": 700
-//    }
-//				]
-//    },
+    var photos:Photos
+
     var chat_options:Bool?
-    init(id:String, url:String, title:String, list_label:String) {
+    init(id:String, url:String, title:String, list_label:String, photosJson:JSON) {
         self.id = id
         self.url = url
         self.list_label = list_label
         self.title = title
+        self.photos = Photos(json: photosJson)
     }
 }

@@ -1,0 +1,6 @@
+framework module Pods_OLX_Alirio {
+  umbrella header "Pods-OLX Alirio-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -15,32 +15,18 @@ class Ads: NSObject {
     var delegate:AdsDelegate?
     
     var numberOfAds:Int {
-        return ads.count
+        return self.ads.count
     }
     override init() {
         super.init()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             self.ads = self.getAdsFromServer()
             dispatch_async(dispatch_get_main_queue(), {
-                print(self.numberOfAds)
                 self.delegate?.adsUpdated()
             });
         });
     }
     
-    func deleteItemAtIndexPath(indexPaths:[NSIndexPath]){
-        var indexes = [Int]()
-        indexPaths.forEach { (indexPath) in
-            indexes.append(indexPath.row)
-        }
-        var leftAds = [Ad]()
-        for(index, add) in ads.enumerate(){
-            if !indexes.contains(index) {
-                leftAds.append(add)
-            }
-        }
-        ads = leftAds
-    }
     func adForItemAtIndexPath(indexPath:NSIndexPath) -> Ad {
         if indexPath.section > 0 {
             let sectionAds = self.adsForSection(indexPath.section)
@@ -56,7 +42,7 @@ class Ads: NSObject {
     }
     
     func getAdsFromServer() -> [Ad]{
-        var newAdds = [Ad]()
+        var newAds = [Ad]()
         let url = "https://olx.pt/i2/ads/?json=1&search"
         let parameters = ["category_id": 25]
         
@@ -69,9 +55,8 @@ class Ads: NSObject {
                     let json = JSON(value)
                     
                     let adsArray = json["ads"].arrayValue
-                    adsArray.forEach({ (ad) in
-                        let ad = Ad(id: ad["id"].stringValue, url: ad["url"].stringValue, title:ad["title"].stringValue,list_label: ad["list_label"].stringValue)
-                        newAdds.append(ad)
+                    adsArray.forEach({ (adJSON) in
+                        newAds.append( self.parseAdFromJson(adJSON) )
                     })
                 }
             case .Failure(let error):
@@ -82,7 +67,51 @@ class Ads: NSObject {
         while dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW) != 0 {
             NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 10))
         }
-        return newAdds
+        return newAds
+    }
+    
+    
+    func parseAdFromJson(adJSON:JSON) -> Ad{
+        //print(adJSON)
+        let id = adJSON["id"].stringValue
+        let url = adJSON["url"].stringValue
+        let title = adJSON["title"].stringValue
+        let list_label = adJSON["list_label"].stringValue
+        let photos = adJSON["photos"]
+        
+        let ad = Ad(id: id, url: url, title: title,list_label: list_label, photosJson: photos)
+        
+        ad.preview_url = adJSON["preview_url"].stringValue
+        ad.created = adJSON["created"].stringValue
+        ad.age = adJSON["age"].int
+        ad.highlighted = adJSON["highlighted"].boolValue
+        ad.urgent = adJSON["urgent"].boolValue
+        ad.topAd = adJSON["topAd"].boolValue
+        ad.promotion_section = adJSON["promotion_section"].boolValue
+        ad.category_id = adJSON["description"].int
+        ad.business = adJSON["business"].boolValue
+        ad.hide_user_ads_button = adJSON["hide_user_ads_button"].boolValue
+        ad.status = adJSON["status"].stringValue
+        ad.header = adJSON["header"].stringValue
+        ad.header_type = adJSON["header_type"].stringValue
+        ad.has_email = adJSON["has_email"].boolValue
+        ad.is_price_negotiable = adJSON["is_price_negotiable"].boolValue
+        ad.map_zoom = adJSON["map_zoom"].int
+        ad.map_lat = adJSON["map_lat"].doubleValue
+        ad.map_lon = adJSON["map_lon"].doubleValue
+        ad.map_radius = adJSON["map_radius"].doubleValue
+        ad.map_show_detailed = adJSON["map_show_detailed"].boolValue
+        ad.map_location = adJSON["map_location"].stringValue
+        ad.city_label = adJSON["city_label"].stringValue
+        ad.person = adJSON["person"].stringValue
+        ad.user_label = adJSON["user_label"].stringValue
+        ad.user_ads_id = adJSON["user_ads_id"].stringValue
+        ad.numeric_user_id = adJSON["numeric_user_id"].int64Value
+        ad.user_ads_url = adJSON["user_ads_url"].stringValue
+        ad.list_label_ad = adJSON["list_label_ad"].stringValue
+        ad.user_ads_url = adJSON["user_ads_url"].stringValue
+        
+        return ad
     }
 }
 

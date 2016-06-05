@@ -10,11 +10,14 @@ import UIKit
 
 class AdPhotosViewController: UIViewController {
     var pageIndex: Int!
-    
+    var photo:Photo!
     @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
     }
-
+    func setupUI(){
+        self.imageView.downloadedFrom(link: photo.url)
+    }
 }

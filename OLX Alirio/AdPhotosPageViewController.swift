@@ -8,17 +8,15 @@
 
 import UIKit
 
-class AdPhotosPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate  {
-    let numberOfViews = 3
-    
+class AdPhotosPageViewController: UIPageViewController, UIPageViewControllerDataSource{
+    var photos:Photos!
     var pageIndex = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController!.navigationBar.topItem!.title = ""
         self.dataSource = self
-        self.delegate = self;
-        self.view.layer.backgroundColor = UIColor.whiteColor().CGColor
-        setViewControllers([self.viewControllerAtIndex(0) as AdPhotosViewController], direction: .Forward, animated: true, completion: nil)
+        self.setViewControllers([self.viewControllerAtIndex(0) as AdPhotosViewController], direction: .Forward, animated: true, completion: nil)
     }
     
     
@@ -26,11 +24,10 @@ class AdPhotosPageViewController: UIPageViewController, UIPageViewControllerData
         super.didReceiveMemoryWarning()
     }
     func viewControllerAtIndex(index: Int) -> AdPhotosViewController {
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("AdDetailViewController") as! AdPhotosViewController
+        let viewController = UIStoryboard(name: Storyboard.StoryboardIdentifier, bundle: nil).instantiateViewControllerWithIdentifier(Storyboard.AdPhotosViewIdentifier) as! AdPhotosViewController
         viewController.pageIndex = index
-        
+        viewController.photo = self.photos.photoAtIndex(index)
         self.pageIndex = index
-        viewController.imageView.image = UIImage(named: "\(index+1)")
         return viewController
     }
     
@@ -49,24 +46,21 @@ class AdPhotosPageViewController: UIPageViewController, UIPageViewControllerData
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        var index = (viewController as! AdDetailViewController).pageIndex
+        var index = (viewController as! AdPhotosViewController).pageIndex
         index = index + 1
         
         switch index {
-        case numberOfViews:
+        case photos.numberOfPhotos:
             return nil
         case NSNotFound:
             fatalError("NSNotFound. Should crash.")
         default:
-            
             return viewControllerAtIndex(index)
         }
-        
-        
     }
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return numberOfViews
+        return photos.numberOfPhotos
     }
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
