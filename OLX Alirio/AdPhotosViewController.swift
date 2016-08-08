@@ -19,10 +19,10 @@ class AdPhotosViewController: UIViewController {
     }
     func setupUI(){
         for view in self.view.subviews {
-            if view.isKindOfClass(UIScrollView) {
-                view.frame = UIScreen.mainScreen().bounds
-            } else if view.isKindOfClass(UIPageControl) {
-                view.backgroundColor = UIColor.clearColor()
+            if view.isKind(UIScrollView) {
+                view.frame = UIScreen.main().bounds
+            } else if view.isKind(UIPageControl) {
+                view.backgroundColor = UIColor.clear()
             }
         }
         self.imageView.downloadedFrom(link: photo.url)

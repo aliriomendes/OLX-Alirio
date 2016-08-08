@@ -26,7 +26,7 @@
                                 <rect key="frame" x="17.5" y="72" width="379.5" height="260"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="380" height="260"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="379.5" height="260"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="rfm-4z-CLw">
@@ -111,6 +111,7 @@
                                     <outlet property="thumbnail" destination="zCD-uA-TGx" id="Ktd-zx-Gf4"/>
                                     <outlet property="title" destination="cJM-p8-jeG" id="z2W-Uz-qyF"/>
                                     <outlet property="titleContainerView" destination="Zbo-iM-uZ0" id="9aQ-aU-Lxi"/>
+                                    <segue destination="xGN-Eb-yyx" kind="show" identifier="adDetail" id="tks-hR-OyC"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -124,9 +125,6 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-                    <connections>
-                        <segue destination="xGN-Eb-yyx" kind="show" identifier="adDetail" id="t7x-yc-V4U"/>
-                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P1s-EW-rTC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -236,9 +234,9 @@
                                                 <exclude reference="z8P-3Q-S4q"/>
                                                 <exclude reference="djs-Kn-jRO"/>
                                                 <exclude reference="jpJ-kD-CWZ"/>
-                                                <exclude reference="yO0-bA-9ZC"/>
-                                                <exclude reference="nvL-kK-kPn"/>
                                                 <exclude reference="lxq-kC-0YJ"/>
+                                                <exclude reference="nvL-kK-kPn"/>
+                                                <exclude reference="yO0-bA-9ZC"/>
                                                 <exclude reference="wJ2-nH-Cif"/>
                                             </mask>
                                         </variation>

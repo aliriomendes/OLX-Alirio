@@ -30,7 +30,7 @@ class AdDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.updateUI()
     }
     func updateUI(){
@@ -46,32 +46,32 @@ class AdDetailViewController: UIViewController {
         setupConstraintsView()
     }
     func setupConstraintsView(){
-        if (UIDevice.currentDevice().orientation == .LandscapeLeft || UIDevice.currentDevice().orientation == .LandscapeRight)
-            && UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+        if (UIDevice.current().orientation == .landscapeLeft || UIDevice.current().orientation == .landscapeRight)
+            && UIDevice.current().userInterfaceIdiom == .phone {
             headerContainerHeightConstraint.constant = 250
         }else{
             headerContainerHeightConstraint.constant = 350
         }
-        UIView.animateWithDuration(0.3) {
+        UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
     }
     
-    @IBAction func headerImageTapped(sender: AnyObject){
+    @IBAction func headerImageTapped(_ sender: AnyObject){
         if ad.photos.numberOfPhotos > 0 {
-            self.performSegueWithIdentifier(Storyboard.PhotosPageSegueIdentifier, sender: self.ad)
+            self.performSegue(withIdentifier: Storyboard.PhotosPageSegueIdentifier, sender: self.ad)
         }
     }
     
-    @IBAction func lacationContainerTapped(sender: AnyObject){
-        self.performSegueWithIdentifier(Storyboard.LocationViewSegueIdentifier, sender: self.ad)
+    @IBAction func lacationContainerTapped(_ sender: AnyObject){
+        self.performSegue(withIdentifier: Storyboard.LocationViewSegueIdentifier, sender: self.ad)
     }
     
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         setupConstraintsView()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == Storyboard.PhotosPageSegueIdentifier {
             let viewController = segue.destinationViewController as! AdPhotosPageViewController
             let ad = sender as! Ad

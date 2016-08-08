@@ -27,10 +27,10 @@ class Photos {
         return self.photos.count
     }
     
-    func photoAtIndex(index:Int) -> Photo {
+    func photoAtIndex(_ index:Int) -> Photo {
         return self.photos[index]
     }
-    func parsePhotosJson(json:JSON){
+    func parsePhotosJson(_ json:JSON){
         var newPhotos = [Photo]()
         self.raikRing = json["raik_ring"].stringValue
         self.raikKey = json["raik_key"].stringValue

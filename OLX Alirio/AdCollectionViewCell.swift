@@ -13,7 +13,7 @@ class AdCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var thumbnail: UIImageView!
     @IBOutlet weak var titleContainerView: UIView!
-    
+    var indexPath:IndexPath?
     var delegate:AdCollectionViewCellDelegate?
     var ad:Ad? {
         didSet{
@@ -22,9 +22,9 @@ class AdCollectionViewCell: UICollectionViewCell {
     }
     
     override func awakeFromNib() {
-        self.titleContainerView.layer.shadowColor = UIColor.grayColor().CGColor
+        self.titleContainerView.layer.shadowColor = UIColor.gray().cgColor
         self.titleContainerView.layer.shadowOpacity = 0.5
-        self.titleContainerView.layer.shadowOffset = CGSizeMake(-2.0, 2.0)
+        self.titleContainerView.layer.shadowOffset = CGSize(width: -2.0, height: 2.0)
     }
     
     func updateUI()  {
@@ -34,12 +34,12 @@ class AdCollectionViewCell: UICollectionViewCell {
             thumbnail.downloadedFrom(link: firstPhoto.url)
         }
     }
-    @IBAction func shareButtonPressed(sender: AnyObject) {
+    @IBAction func shareButtonPressed(_ sender: AnyObject) {
            self.delegate!.shareButtonPressed(self)
     }
 }
 
 protocol AdCollectionViewCellDelegate{
-    func shareButtonPressed(sender: AdCollectionViewCell)
+    func shareButtonPressed(_ sender: AdCollectionViewCell)
 }
 

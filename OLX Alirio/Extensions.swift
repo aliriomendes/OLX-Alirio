@@ -10,19 +10,19 @@ import Foundation
 import SwiftyJSON
 
 extension UIImageView {
-    func downloadedFrom(link link:String) {
+    func downloadedFrom(link:String) {
         guard
-            let url = NSURL(string: link)
+            let url = URL(string: link)
             else {return}
         
-        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: { (data, response, error) -> Void in
+        URLSession.shared().dataTask(with: url, completionHandler: { (data, response, error) -> Void in
             guard
-                let httpURLResponse = response as? NSHTTPURLResponse where httpURLResponse.statusCode == 200,
-                let mimeType = response?.MIMEType where mimeType.hasPrefix("image"),
+                let httpURLResponse = response as? HTTPURLResponse where httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType where mimeType.hasPrefix("image"),
                 let data = data where error == nil,
                 let image = UIImage(data: data)
                 else { return }
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            DispatchQueue.main.async { () -> Void in
                 self.image = image
             }
         }).resume()

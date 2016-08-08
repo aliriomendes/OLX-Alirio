@@ -17,8 +17,8 @@ class AdLocationViewController: UIViewController {
         
         let location = CLLocationCoordinate2DMake(self.ad.map_lat!, self.ad.map_lon!)
         let zoom = self.ad.map_zoom != nil ? self.ad.map_zoom! : 12
-        let camera = GMSCameraPosition.cameraWithTarget(location, zoom: Float(zoom))
-        let mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+        let camera = GMSCameraPosition.camera(withTarget: location, zoom: Float(zoom))
+        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         
         let marker = GMSMarker(position: location)
         marker.title = ad.city_label
@@ -33,7 +33,7 @@ class AdLocationViewController: UIViewController {
         
         view = mapView
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
     
     }
     

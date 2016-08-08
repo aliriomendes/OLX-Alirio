@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Ad: NSObject {
+public class Ad: NSObject {
     var id:String
     var url:String
     var preview_url:String?
@@ -57,4 +57,6 @@ class Ad: NSObject {
         self.title = title
         self.photos = Photos(json: photosJson)
     }
+    
+    
 }

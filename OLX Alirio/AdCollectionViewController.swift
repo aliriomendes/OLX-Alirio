@@ -21,68 +21,67 @@ class AdCollectionViewController: UICollectionViewController, AdsDelegate, AdCol
         
         super.viewDidLoad()
         self.ads.delegate = self
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController!.navigationBar.shadowImage = UIImage()
-        self.navigationController!.navigationBar.translucent = true;
+        self.navigationController!.navigationBar.isTranslucent = true;
         self.navigationController!.navigationBar.topItem!.title = ""
         
         self.setupCollectionView()
     }
     func setupCollectionView(){
-        if UIDevice.currentDevice().orientation == .Portrait && UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+        if UIDevice.current().orientation == .portrait && UIDevice.current().userInterfaceIdiom == .phone {
             self.numberOfItemsPerRow = 1.0
         }
-        else if (UIDevice.currentDevice().orientation == .LandscapeLeft || UIDevice.currentDevice().orientation == .LandscapeRight)
-                && UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+        else if (UIDevice.current().orientation == .landscapeLeft || UIDevice.current().orientation == .landscapeRight)
+                && UIDevice.current().userInterfaceIdiom == .pad {
             self.numberOfItemsPerRow = 3.0
         }else{
             self.numberOfItemsPerRow = 2.0
         }
         self.totalPading = 8 * (self.numberOfItemsPerRow + 1)
-        self.cellWidth = (CGRectGetWidth(collectionView!.frame) - totalPading)/numberOfItemsPerRow
+        self.cellWidth = (collectionView!.frame.width - totalPading)/numberOfItemsPerRow
         self.cellHeight = self.cellWidth * 0.66
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: cellWidth, height:cellHeight)
     }
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         setupCollectionView()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.ads.numberOfAds
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell  = collectionView.dequeueReusableCellWithReuseIdentifier( Storyboard.CellIdentifier, forIndexPath: indexPath) as! AdCollectionViewCell
-        let ad = ads.adForItemAtIndexPath(indexPath)
-        cell.ad = ad
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell  = collectionView.dequeueReusableCell( withReuseIdentifier: Storyboard.CellIdentifier, for: indexPath) as! AdCollectionViewCell
+
+        cell.ad = ads.adForItemAtIndexPath(indexPath)
+        cell.indexPath = indexPath
         cell.delegate = self
+        
         return cell
     }
     func adsUpdated() {
         collectionView?.reloadData()
     }
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier(Storyboard.CellDetailIdentifier, sender: indexPath)
-    }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == Storyboard.CellDetailIdentifier {
             let viewController = segue.destinationViewController as! AdDetailPageViewController
             
             viewController.ads = self.ads
-            viewController.indexPath = sender as! NSIndexPath
+            viewController.indexPath = (sender as! AdCollectionViewCell).indexPath
         }
     }
     
-    func shareButtonPressed(sender: AdCollectionViewCell) {
+    func shareButtonPressed(_ sender: AdCollectionViewCell) {
         let ad =  sender.ad!
         let url = ad.url
         print(url)
@@ -90,16 +89,13 @@ class AdCollectionViewController: UICollectionViewController, AdsDelegate, AdCol
         
         let shareItems:Array = [messageStr, url]
         let activityController = UIActivityViewController(activityItems:shareItems, applicationActivities: nil)
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+        if UIDevice.current().userInterfaceIdiom == .pad {
             activityController.popoverPresentationController?.sourceView = self.view
         }
-        self.presentViewController(activityController, animated: true,completion: nil)
+        self.present(activityController, animated: true,completion: nil)
     }
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
-        
-    }
-    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == (ads.numberOfAds-1) {
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).row == (ads.numberOfAds-1) {
             ads.loadMoreFromServer()
         }
     }

@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class Ads: NSObject {
+public class Ads: NSObject {
     private var ads = [Ad]()
     private let url = "https://olx.pt/i2/ads/?json=1&search"
     private let parameters = ["category_id": 25]
@@ -24,45 +24,45 @@ class Ads: NSObject {
     }
     override init() {
         super.init()
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+        DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosDefault).async(execute: {
             self.ads = self.getAdsFromServer(self.url,parameters: self.parameters)
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.delegate?.adsUpdated()
             });
         });
     }
     
-    func adForItemAtIndexPath(indexPath:NSIndexPath) -> Ad {
-        if indexPath.section > 0 {
-            let sectionAds = self.adsForSection(indexPath.section)
-            return sectionAds[indexPath.row]
+    func adForItemAtIndexPath(_ indexPath:IndexPath) -> Ad {
+        if (indexPath as NSIndexPath).section > 0 {
+            let sectionAds = self.adsForSection((indexPath as NSIndexPath).section)
+            return sectionAds[(indexPath as NSIndexPath).row]
         }else {
-            return self.ads[indexPath.row]
+            return self.ads[(indexPath as NSIndexPath).row]
         }
     }
     
-    func adsForSection(section:Int) -> [Ad] {
+    func adsForSection(_ section:Int) -> [Ad] {
         //MARK: - TODO
         return []
     }
     func loadMoreFromServer(){
         if  self.ads.count < self.totalAds {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                self.ads.appendContentsOf(  self.getAdsFromServer(self.nextPageUrl!) )
-                dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosDefault).async(execute: {
+                self.ads.append(  contentsOf: self.getAdsFromServer(self.nextPageUrl!) )
+                DispatchQueue.main.async(execute: {
                     self.delegate?.adsUpdated()
                 });
             });
         }
     }
 
-    func getAdsFromServer(url:String, parameters:Dictionary<String,AnyObject>? = nil) -> [Ad]{
+    func getAdsFromServer(_ url:String, parameters:Dictionary<String,AnyObject>? = nil) -> [Ad]{
         var newAds = [Ad]()
-        let semaphore = dispatch_semaphore_create(0);
+        let semaphore = DispatchSemaphore(value: 0);
         
         Alamofire.request(.GET, url, parameters: parameters).validate().responseJSON { response in
             switch response.result {
-            case .Success:
+            case .success:
                 if let value = response.result.value {
                     let json = JSON(value)
                     
@@ -75,18 +75,18 @@ class Ads: NSObject {
                         newAds.append( self.parseAdFromJson(adJSON) )
                     })
                 }
-            case .Failure(let error):
+            case .failure(let error):
                 print(error)
             }
-             dispatch_semaphore_signal(semaphore);
+             semaphore.signal();
         }
-        while dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW) != 0 {
-            NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 10))
+        while semaphore.wait(timeout: DispatchTime.now()) != 0 {
+            RunLoop.current().run(mode: RunLoop Mode.defaultRunLoopMode, before: Date(timeIntervalSinceNow: 10))
         }
         return newAds
     }
     
-    func parseAdFromJson(adJSON:JSON) -> Ad{
+    func parseAdFromJson(_ adJSON:JSON) -> Ad{
         //print(adJSON)
         let id = adJSON["id"].stringValue
         let url = adJSON["url"].stringValue
